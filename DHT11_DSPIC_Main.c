@@ -8,7 +8,7 @@
 #include <xc.h>
 #include "RS232.h"
 //Fosc = 7.37MHz Por Defecto
-#define FCY 1842500
+#define FCY 5000000
 #include <libpic30.h>
 
 // DSPIC30F4013 Configuration Bit Settings
@@ -16,7 +16,7 @@
 // 'C' source line config statements
 
 // FOSC
-#pragma config FOSFPR = FRC             // Oscillator (Internal Fast RC (No change to Primary Osc Mode bits))
+#pragma config FOSFPR = HS              // Oscillator (HS)
 #pragma config FCKSMEN = CSW_FSCM_OFF   // Clock Switching and Monitor (Sw Disabled, Mon Disabled)
 
 // FWDT
@@ -37,9 +37,9 @@
 #define LED_CPU _RD3
 
 // Pines del DHT
-#define DATA_DIR _TRISB12
-#define DATA_IN _RB12
-#define DATA_OUT _LATB12
+#define DATA_DIR _TRISB11
+#define DATA_IN _RB11
+#define DATA_OUT _LATB11
 
 /*------------------------- Función de Interrupción Timer 1 ----------------*/
 void __attribute__((interrupt,auto_psv)) _T1Interrupt(void);
@@ -67,7 +67,7 @@ void main(void) {
     /*------------------ Configuración de RS232 ---------------------------*/
     Activar_RS232();
     /*------------------ Configuracion DHT11 ------------------------------*/
-    ADPCFG=0xFF00;    // Del Analogo 8 al 15 como Pin Digital
+    ADPCFG=0xFFFF;    // Del Analogo 8 al 15 como Pin Digital
     DATA_OUT=0;       // Inicializar pin de salida en cero
     DATA_DIR=1;       // Definir el puerto como Entrada
     /*------------------ Configuración de Interrupciones -------------------*/
