@@ -60,10 +60,10 @@ void main(void) {
     LATD=0;
     _LATD9 = 1;
     /*------------------ Configuración del Timer 1 -------------------------*/
-    PR1=7196;
+    PR1=65535;
     TMR1=0;
     _T1IF=0;
-    T1CON = 0x8020;
+    T1CON = 0x8010;
     /*------------------ Configuración de RS232 ---------------------------*/
     Activar_RS232();
     /*------------------ Configuracion DHT11 ------------------------------*/
@@ -120,6 +120,7 @@ void LeerHT11(void){
   bandera=0;
   TMR1=0;
   do{
+      /*------------- Condición De Start Inicio -----------------*/
     DATA_DIR=0;
     DATA_OUT=0;
     __delay_ms(18);
@@ -135,6 +136,7 @@ void LeerHT11(void){
     while(DATA_IN==1){
       if(bandera==1) break;  
     }
+     /*---------------- Condición de Start Final ----------------*/
     Hum=LeerByte();
     LeerByte();
     Temp=LeerByte();
@@ -185,3 +187,9 @@ unsigned char Check(void){
   if(aux==Che) res=1;
   return res;  
 }
+
+
+
+
+
+
