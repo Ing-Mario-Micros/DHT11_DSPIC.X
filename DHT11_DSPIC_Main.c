@@ -41,18 +41,28 @@
 #define DATA_IN _RB11
 #define DATA_OUT _LATB11
 
+#define DATA_DIR2 _TRISB12
+#define DATA_IN2 _RB12
+#define DATA_OUT2 _LATB12
+
 /*------------------------- Función de Interrupción Timer 1 ----------------*/
 void __attribute__((interrupt,auto_psv)) _T1Interrupt(void);
 
 void __attribute__((interrupt,auto_psv)) _U2RXInterrupt(void);
 /*--------------------------- Variables DHT11 ---------------------------*/
-unsigned char Temp=10,Hum=20,Che,bandera = 0,Leer_DHT =0;
+unsigned char Temp1=10,Hum1=20,Che,bandera = 0,Leer_DHT =0;
+unsigned char Temp2=10,Hum2=20;
 unsigned char Dec,Uni;
-/*--------------------------- Funciones DHT11 ---------------------------*/
+/*--------------------------- Funciones DHT11-1 ---------------------------*/
 void LeerHT11(void);
 unsigned char LeerByte(void);
 unsigned char LeerBit(void);
 unsigned char Check();
+
+/*--------------------------- Funciones DHT11-2 ---------------------------*/
+void LeerHT11_2(void);
+unsigned char LeerByte_2(void);
+unsigned char LeerBit_2(void);
 
 void main(void) {
     /*------------------ Configuración de Pines Digital --------------------*/
@@ -70,6 +80,9 @@ void main(void) {
     ADPCFG=0xFFFF;    // Del Analogo 8 al 15 como Pin Digital
     DATA_OUT=0;       // Inicializar pin de salida en cero
     DATA_DIR=1;       // Definir el puerto como Entrada
+    
+    DATA_OUT2=0;       // Inicializar pin de salida en cero
+    DATA_DIR2=1;       // Definir el puerto como Entrada
     /*------------------ Configuración de Interrupciones -------------------*/
     /**** Interrupción Timer 1 ****/
     _T1IE = 1;  //Habilitación Interrupción Timer1
@@ -82,22 +95,33 @@ void main(void) {
     while(1){
         //AUX=U2RXREG;
         //_LATD9 = 1;
-        MensajeRS232("Hola Mundo\n");
-        if(DATA_IN==1){
+        MensajeRS232("DHT 11-3\n");
+        /*if(DATA_IN==1){
             MensajeRS232("On\n");
         }
         else{
             MensajeRS232("Off\n");
-        }
+        }/****/
         MensajeRS232(BufferR2);
         LeerHT11();
         Transmitir('T');
-        Transmitir(Temp/10 + 48);
-        Transmitir(Temp%10 + 48);
+        Transmitir(Temp1/10 + 48);
+        Transmitir(Temp1%10 + 48);
         Transmitir(' ');
         Transmitir('H');
-        Transmitir(Hum/10 + 48);
-        Transmitir(Hum%10 + 48);
+        Transmitir(Hum1/10 + 48);
+        Transmitir(Hum1%10 + 48);
+        Transmitir('\n');
+        
+        MensajeRS232("DHT 11-4\n");
+        LeerHT11_2();
+        Transmitir('T');
+        Transmitir(Temp2/10 + 48);
+        Transmitir(Temp2%10 + 48);
+        Transmitir(' ');
+        Transmitir('H');
+        Transmitir(Hum2/10 + 48);
+        Transmitir(Hum2%10 + 48);
         Transmitir('\n');
         //_LATD9 = 0;
         //Transmitir(AUX);
@@ -137,9 +161,9 @@ void LeerHT11(void){
       if(bandera==1) break;  
     }
      /*---------------- Condición de Start Final ----------------*/
-    Hum=LeerByte();
+    Hum1=LeerByte();
     LeerByte();
-    Temp=LeerByte();
+    Temp1=LeerByte();
     LeerByte();
     Che=LeerByte();
     if(bandera==1){
@@ -152,8 +176,8 @@ void LeerHT11(void){
   
   repetir=0;
   if(contador==6){
-    Temp=0;
-    Hum=0;
+    Temp1=0;
+    Hum1=0;
     contador=0;
   }
 }
@@ -183,12 +207,82 @@ unsigned char LeerBit(void){
 }
 unsigned char Check(void){
   unsigned char res=0,aux;
-  aux=Temp+Hum;
+  aux=Temp1+Hum1;
   if(aux==Che) res=1;
   return res;  
 }
+/**-------------------------------------------------------------------------**/
 
+/* -------------------------Funciones DHT11------------------------------ */
+void LeerHT11_2(void){
+  unsigned char i,contr=0;
+  unsigned char repetir=0;
+  unsigned char contador=0;
+  bandera=0;
+  TMR1=0;
+  do{
+      /*------------- Condición De Start Inicio -----------------*/
+    DATA_DIR2=0;
+    DATA_OUT2=0;
+    __delay_ms(18);
+    DATA_DIR2=1;
+    while(DATA_IN2==1){
+      if(bandera==1) break;  
+    }
+    __delay_us(40);
+    if(DATA_IN2==0) contr++;
+    __delay_us(80);
+    if(DATA_IN2==1) contr++;
+    //__delay_us(120);
+    while(DATA_IN2==1){
+      if(bandera==1) break;  
+    }
+     /*---------------- Condición de Start Final ----------------*/
+    Hum2=LeerByte_2();
+    LeerByte_2();
+    Temp2=LeerByte_2();
+    LeerByte_2();
+    Che=LeerByte_2();
+    if(bandera==1){
+      repetir=1;
+      bandera=0;
+      contador++;
+      TMR1=0;
+    }
+  }while(repetir==1 && contador<6);
+  
+  repetir=0;
+  if(contador==6){
+    Temp1=0;
+    Hum1=0;
+    contador=0;
+  }
+}
 
+unsigned char LeerByte_2(void){
+  unsigned char res=0,i;
+  
+  for(i=8;i>0;i--){
+    res=(res<<1) | LeerBit_2();  
+  }
+  return res;
+}
+unsigned char LeerBit_2(void){
+    unsigned char res=0;
+     while(DATA_IN2==0){
+       if(bandera==1) break;  
+     }
+     __delay_us(13);
+     if(DATA_IN2==1) res=0;
+     __delay_us(22);
+     if(DATA_IN2==1){
+       res=1;
+       while(DATA_IN2==1){
+         if(bandera==1) break;  
+       }
+     }  
+     return res;  
+}
 
 
 

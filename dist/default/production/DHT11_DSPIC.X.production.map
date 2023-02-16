@@ -97,12 +97,12 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100               0x688           0x9cc  (2508)
-.const                       0x788                0x16            0x21  (33)
-.text                        0x79e               0x49c           0x6ea  (1770)
-.init.delay32                0xc3a                0x1c            0x2a  (42)
-.dinit                       0xc56                0x10            0x18  (24)
+.const                       0x788                0x14            0x1e  (30)
+.text                        0x79c               0x650           0x978  (2424)
+.init.delay32                0xdec                0x1c            0x2a  (42)
+.dinit                       0xe08                0x12            0x1b  (27)
 
-                 Total "program" memory used (bytes):         0x1119  (4377) 8%
+                 Total "program" memory used (bytes):         0x13a7  (5031) 10%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x800]
@@ -110,9 +110,9 @@ section                    address   length (PC units)   length (bytes) (dec)
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .nbss                        0x800                   0            0x1a  (26)
-.ndata                       0x81a                   0             0x2  (2)
+.ndata                       0x81a                   0             0x4  (4)
 
-                 Total "data" memory used (bytes):           0x1c  (28) 1%
+                 Total "data" memory used (bytes):           0x1e  (30) 1%
 
 
 Dynamic Memory Usage
@@ -120,9 +120,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x81c                               0x7e4  (2020)
+stack                        0x81e                               0x7e2  (2018)
 
-                 Maximum dynamic memory (bytes):          0x7e4  (2020)
+                 Maximum dynamic memory (bytes):          0x7e2  (2018)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -136,17 +136,21 @@ External Symbols in Data Memory (by address):
                     0x0817                  _Leer_DHT
                     0x0818                  _Dec
                     0x0819                  _Uni
-                    0x081a                  _Temp
-                    0x081b                  _Hum
+                    0x081a                  _Temp1
+                    0x081b                  _Hum1
+                    0x081c                  _Temp2
+                    0x081d                  _Hum2
 
 External Symbols in Data Memory (by name):
 
                     0x0801                  _BufferR2
                     0x0815                  _Che
                     0x0818                  _Dec
-                    0x081b                  _Hum
+                    0x081b                  _Hum1
+                    0x081d                  _Hum2
                     0x0817                  _Leer_DHT
-                    0x081a                  _Temp
+                    0x081a                  _Temp1
+                    0x081c                  _Temp2
                     0x0819                  _Uni
                     0x0800                  _b
                     0x0816                  _bandera
@@ -160,18 +164,18 @@ External Symbols in Program Memory (by address):
                   0x0001c8                  __T1Interrupt
                   0x0001f8                  __U2RXInterrupt
                   0x00021c                  __DefaultInterrupt
-                  0x000222                  ___ltsf2
-                  0x000222                  ___lesf2
                   0x000222                  ___eqsf2
+                  0x000222                  ___lesf2
+                  0x000222                  ___ltsf2
                   0x000226                  ___fixsfsi
                   0x000268                  ___floatsisf
                   0x00026e                  __funpack
-                  0x000298                  ___subsf3
                   0x000298                  ___subsf3x
+                  0x000298                  ___subsf3
                   0x0002aa                  ___addsf3x
                   0x0002aa                  ___addsf3
-                  0x000474                  ___mulsf3x
                   0x000474                  ___mulsf3
+                  0x000474                  ___mulsf3x
                   0x000580                  __dnrmpackf
                   0x0005d4                  __unpackdnrmf
                   0x000632                  __typef
@@ -181,37 +185,43 @@ External Symbols in Program Memory (by address):
                   0x0006ce                  ___floatundisf
                   0x00072c                  __fpack
                   0x000778                  __funpack2
-                  0x00079e                  _Activar_RS232
-                  0x0007c6                  _Interrupcion_RS232
-                  0x00082e                  _MensajeRS232
-                  0x000848                  _Transmitir
-                  0x000860                  _ImprimirDecimal
-                  0x0009a4                  _Codificar_Dato
-                  0x0009fe                  _main
-                  0x000ab2                  _LeerHT11
-                  0x000b7e                  _LeerByte
-                  0x000bb4                  _LeerBit
-                  0x000c14                  _Check
-                  0x000c3a                  ___delay32
+                  0x00079c                  _Activar_RS232
+                  0x0007c4                  _Interrupcion_RS232
+                  0x00082c                  _MensajeRS232
+                  0x000846                  _Transmitir
+                  0x00085e                  _ImprimirDecimal
+                  0x0009a2                  _Codificar_Dato
+                  0x0009fc                  _main
+                  0x000b02                  _LeerHT11
+                  0x000bce                  _LeerByte
+                  0x000c04                  _LeerBit
+                  0x000c64                  _Check
+                  0x000c8a                  _LeerHT11_2
+                  0x000d56                  _LeerByte_2
+                  0x000d8c                  _LeerBit_2
+                  0x000dec                  ___delay32
 
 External Symbols in Program Memory (by name):
 
-                  0x00079e                  _Activar_RS232
-                  0x000c14                  _Check
-                  0x0009a4                  _Codificar_Dato
-                  0x000860                  _ImprimirDecimal
-                  0x0007c6                  _Interrupcion_RS232
-                  0x000bb4                  _LeerBit
-                  0x000b7e                  _LeerByte
-                  0x000ab2                  _LeerHT11
-                  0x00082e                  _MensajeRS232
-                  0x000848                  _Transmitir
+                  0x00079c                  _Activar_RS232
+                  0x000c64                  _Check
+                  0x0009a2                  _Codificar_Dato
+                  0x00085e                  _ImprimirDecimal
+                  0x0007c4                  _Interrupcion_RS232
+                  0x000c04                  _LeerBit
+                  0x000d8c                  _LeerBit_2
+                  0x000bce                  _LeerByte
+                  0x000d56                  _LeerByte_2
+                  0x000b02                  _LeerHT11
+                  0x000c8a                  _LeerHT11_2
+                  0x00082c                  _MensajeRS232
+                  0x000846                  _Transmitir
                   0x00021c                  __DefaultInterrupt
                   0x0001c8                  __T1Interrupt
                   0x0001f8                  __U2RXInterrupt
                   0x0002aa                  ___addsf3
                   0x0002aa                  ___addsf3x
-                  0x000c3a                  ___delay32
+                  0x000dec                  ___delay32
                   0x000222                  ___eqsf2
                   0x000226                  ___fixsfsi
                   0x0006ae                  ___floatdisf
@@ -235,7 +245,7 @@ External Symbols in Program Memory (by name):
                   0x000100                  __resetPRI
                   0x000632                  __typef
                   0x0005d4                  __unpackdnrmf
-                  0x0009fe                  _main
+                  0x0009fc                  _main
 
 Memory Configuration
 
@@ -404,71 +414,71 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x1d2c
+.debug_info       0x000000       0x1e39
  *(.debug_info)
- .debug_info      0x000000       0x1478 build/default/production/DHT11_DSPIC_Main.o
- .debug_info      0x001478         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.XX_o)
- .debug_info      0x001505         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
- .debug_info      0x001592         0x8f c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
- .debug_info      0x001621         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_info      0x0016ae         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.XX_o)
- .debug_info      0x00174b         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
- .debug_info      0x0017e8         0xa0 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
- .debug_info      0x001888         0xa2 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
- .debug_info      0x00192a         0x9c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
- .debug_info      0x0019c6         0x9f c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
- .debug_info      0x001a65         0x8e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.XX_o)
- .debug_info      0x001af3         0x8f c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
- .debug_info      0x001b82         0x91 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
- .debug_info      0x001c13         0x8b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
- .debug_info      0x001c9e         0x8e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.XX_o)
+ .debug_info      0x000000       0x1585 build/default/production/DHT11_DSPIC_Main.o
+ .debug_info      0x001585         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.XX_o)
+ .debug_info      0x001612         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+ .debug_info      0x00169f         0x8f c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+ .debug_info      0x00172e         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_info      0x0017bb         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.XX_o)
+ .debug_info      0x001858         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+ .debug_info      0x0018f5         0xa0 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+ .debug_info      0x001995         0xa2 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+ .debug_info      0x001a37         0x9c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+ .debug_info      0x001ad3         0x9f c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+ .debug_info      0x001b72         0x8e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.XX_o)
+ .debug_info      0x001c00         0x8f c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+ .debug_info      0x001c8f         0x91 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+ .debug_info      0x001d20         0x8b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_info      0x001dab         0x8e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.XX_o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x2ab
+.debug_abbrev     0x000000        0x2e2
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x17f build/default/production/DHT11_DSPIC_Main.o
- .debug_abbrev    0x00017f         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.XX_o)
- .debug_abbrev    0x000193         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
- .debug_abbrev    0x0001a7         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
- .debug_abbrev    0x0001bb         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_abbrev    0x0001cf         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.XX_o)
- .debug_abbrev    0x0001e3         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
- .debug_abbrev    0x0001f7         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
- .debug_abbrev    0x00020b         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
- .debug_abbrev    0x00021f         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
- .debug_abbrev    0x000233         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
- .debug_abbrev    0x000247         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.XX_o)
- .debug_abbrev    0x00025b         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
- .debug_abbrev    0x00026f         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
- .debug_abbrev    0x000283         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
- .debug_abbrev    0x000297         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.XX_o)
+ .debug_abbrev    0x000000        0x1b6 build/default/production/DHT11_DSPIC_Main.o
+ .debug_abbrev    0x0001b6         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.XX_o)
+ .debug_abbrev    0x0001ca         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+ .debug_abbrev    0x0001de         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+ .debug_abbrev    0x0001f2         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_abbrev    0x000206         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.XX_o)
+ .debug_abbrev    0x00021a         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+ .debug_abbrev    0x00022e         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+ .debug_abbrev    0x000242         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+ .debug_abbrev    0x000256         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+ .debug_abbrev    0x00026a         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+ .debug_abbrev    0x00027e         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.XX_o)
+ .debug_abbrev    0x000292         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+ .debug_abbrev    0x0002a6         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+ .debug_abbrev    0x0002ba         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_abbrev    0x0002ce         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.XX_o)
 
-.debug_line       0x000000        0x83f
+.debug_line       0x000000        0x88a
  *(.debug_line)
- .debug_line      0x000000        0x1f3 build/default/production/DHT11_DSPIC_Main.o
- .debug_line      0x0001f3         0x37 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.XX_o)
- .debug_line      0x00022a         0x56 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
- .debug_line      0x000280         0x3a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
- .debug_line      0x0002ba         0x4a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_line      0x000304        0x136 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.XX_o)
- .debug_line      0x00043a         0xcc c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
- .debug_line      0x000506         0x72 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
- .debug_line      0x000578         0x7a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
- .debug_line      0x0005f2         0x5e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
- .debug_line      0x000650         0x51 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
- .debug_line      0x0006a1         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.XX_o)
- .debug_line      0x0006f4         0x47 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
- .debug_line      0x00073b         0x6c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
- .debug_line      0x0007a7         0x5a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
- .debug_line      0x000801         0x3e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.XX_o)
+ .debug_line      0x000000        0x23e build/default/production/DHT11_DSPIC_Main.o
+ .debug_line      0x00023e         0x37 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.XX_o)
+ .debug_line      0x000275         0x56 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+ .debug_line      0x0002cb         0x3a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+ .debug_line      0x000305         0x4a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_line      0x00034f        0x136 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.XX_o)
+ .debug_line      0x000485         0xcc c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+ .debug_line      0x000551         0x72 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+ .debug_line      0x0005c3         0x7a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+ .debug_line      0x00063d         0x5e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+ .debug_line      0x00069b         0x51 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+ .debug_line      0x0006ec         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.XX_o)
+ .debug_line      0x00073f         0x47 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+ .debug_line      0x000786         0x6c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+ .debug_line      0x0007f2         0x5a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_line      0x00084c         0x3e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.XX_o)
 
-.debug_frame      0x000000        0x1b2
+.debug_frame      0x000000        0x208
  *(.debug_frame)
- .debug_frame     0x000000        0x1b2 build/default/production/DHT11_DSPIC_Main.o
+ .debug_frame     0x000000        0x208 build/default/production/DHT11_DSPIC_Main.o
 
-.debug_str        0x000000         0x6f
+.debug_str        0x000000         0x78
  *(.debug_str)
- .debug_str       0x000000         0x6f build/default/production/DHT11_DSPIC_Main.o
+ .debug_str       0x000000         0x78 build/default/production/DHT11_DSPIC_Main.o
 
 .debug_loc
  *(.debug_loc)
@@ -477,10 +487,10 @@ userdata
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x134
+                  0x000000        0x175
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000        0x134 build/default/production/DHT11_DSPIC_Main.o
+                  0x000000        0x175 build/default/production/DHT11_DSPIC_Main.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1265,10 +1275,12 @@ __c30_signature
                     0x0818                  _Dec
                     0x0819                  _Uni
 
-.ndata              0x081a          0x2
- .ndata             0x081a          0x2 build/default/production/DHT11_DSPIC_Main.o
-                    0x081a                  _Temp
-                    0x081b                  _Hum
+.ndata              0x081a          0x4
+ .ndata             0x081a          0x4 build/default/production/DHT11_DSPIC_Main.o
+                    0x081a                  _Temp1
+                    0x081b                  _Hum1
+                    0x081c                  _Temp2
+                    0x081d                  _Hum2
 
 .config_ICS       0xf8000c          0x2
  .config_ICS      0xf8000c          0x2 build/default/production/DHT11_DSPIC_Main.o
@@ -1294,26 +1306,29 @@ __c30_signature
  .ivt._U2RXInterrupt
                   0x000044          0x2 build/default/production/DHT11_DSPIC_Main.o
 
-.const              0x8788         0x16 load address 0x000788  
- .const             0x8788         0x16 build/default/production/DHT11_DSPIC_Main.o
+.const              0x8788         0x14 load address 0x000788  
+ .const             0x8788         0x14 build/default/production/DHT11_DSPIC_Main.o
 
-.text             0x00079e        0x49c
- .text            0x00079e        0x49c build/default/production/DHT11_DSPIC_Main.o
-                  0x00079e                  _Activar_RS232
-                  0x0007c6                  _Interrupcion_RS232
-                  0x00082e                  _MensajeRS232
-                  0x000848                  _Transmitir
-                  0x000860                  _ImprimirDecimal
-                  0x0009a4                  _Codificar_Dato
-                  0x0009fe                  _main
-                  0x000ab2                  _LeerHT11
-                  0x000b7e                  _LeerByte
-                  0x000bb4                  _LeerBit
-                  0x000c14                  _Check
+.text             0x00079c        0x650
+ .text            0x00079c        0x650 build/default/production/DHT11_DSPIC_Main.o
+                  0x00079c                  _Activar_RS232
+                  0x0007c4                  _Interrupcion_RS232
+                  0x00082c                  _MensajeRS232
+                  0x000846                  _Transmitir
+                  0x00085e                  _ImprimirDecimal
+                  0x0009a2                  _Codificar_Dato
+                  0x0009fc                  _main
+                  0x000b02                  _LeerHT11
+                  0x000bce                  _LeerByte
+                  0x000c04                  _LeerBit
+                  0x000c64                  _Check
+                  0x000c8a                  _LeerHT11_2
+                  0x000d56                  _LeerByte_2
+                  0x000d8c                  _LeerBit_2
 
-.init.delay32     0x000c3a         0x1c
- .init.delay32    0x000c3a         0x1c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(delay32.Meo)
-                  0x000c3a                  ___delay32
+.init.delay32     0x000dec         0x1c
+ .init.delay32    0x000dec         0x1c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(delay32.Meo)
+                  0x000dec                  ___delay32
 
-.dinit            0x000c56         0x10
- .dinit           0x000c56         0x10 data_init
+.dinit            0x000e08         0x12
+ .dinit           0x000e08         0x12 data_init
