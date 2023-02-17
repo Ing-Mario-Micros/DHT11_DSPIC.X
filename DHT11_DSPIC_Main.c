@@ -27,6 +27,7 @@
 // FBORPOR
 #pragma config FPWRT = PWRT_64          // POR Timer Value (64ms)
 #pragma config MCLRE = MCLR_EN          // Master Clear Enable (Enabled)
+#pragma config BOREN = PBOR_OFF         // PBOR Enable (Disabled)
 
 // FICD
 #pragma config ICS = ICS_PGD            // Comm Channel Select (Use PGC/EMUC and PGD/EMUD)
@@ -34,40 +35,40 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
-#define LED_CPU _RD3
+#define LED_CPU _RC13
 
 // Pines del DHT
-#define DATA_DIR _TRISB11
-#define DATA_IN _RB11
-#define DATA_OUT _LATB11
+#define DATA_DIR _TRISB11 //Definición del pin de señal del sensor1
+#define DATA_IN _RB11     //Definición de Entrada y salida de sensor1
+#define DATA_OUT _LATB11  //Definición de salida para sensor1
 
-#define DATA_DIR2 _TRISB12
-#define DATA_IN2 _RB12
-#define DATA_OUT2 _LATB12
+#define DATA_DIR2 _TRISB12//Definición del pin de señal del sensor2
+#define DATA_IN2 _RB12    //Definición de Entrada y salida de sensor2
+#define DATA_OUT2 _LATB12 //Definición de salida para sensor2
 
 /*------------------------- Función de Interrupción Timer 1 ----------------*/
 void __attribute__((interrupt,auto_psv)) _T1Interrupt(void);
 
 void __attribute__((interrupt,auto_psv)) _U2RXInterrupt(void);
 /*--------------------------- Variables DHT11 ---------------------------*/
-unsigned char Temp1=10,Hum1=20,Che,bandera = 0,Leer_DHT =0;
-unsigned char Temp2=10,Hum2=20;
-unsigned char Dec,Uni;
+unsigned char Temp1=10,Hum1=20;
+unsigned char Che,bandera = 0;
+unsigned char Temp2=10,Hum2=20; //
 /*--------------------------- Funciones DHT11-1 ---------------------------*/
 void LeerHT11(void);
 unsigned char LeerByte(void);
 unsigned char LeerBit(void);
-unsigned char Check();
-
 /*--------------------------- Funciones DHT11-2 ---------------------------*/
 void LeerHT11_2(void);
 unsigned char LeerByte_2(void);
 unsigned char LeerBit_2(void);
+/*--------------------------- Funciones DHT11-2 ---------------------------*/
+unsigned char Check();
 
 void main(void) {
     /*------------------ Configuración de Pines Digital --------------------*/
-    TRISD=0;
-    LATD=0;
+    TRISC=0;
+    LATC=0;
     _LATD9 = 1;
     /*------------------ Configuración del Timer 1 -------------------------*/
     PR1=65535;
@@ -91,11 +92,10 @@ void main(void) {
     
     __delay_ms(1000);
     _LATD9 = 0;
-    char AUX;
     while(1){
         //AUX=U2RXREG;
         //_LATD9 = 1;
-        MensajeRS232("DHT 11-3\n");
+        MensajeRS232("DHT 11-3  = ");
         /*if(DATA_IN==1){
             MensajeRS232("On\n");
         }
@@ -112,8 +112,8 @@ void main(void) {
         Transmitir(Hum1/10 + 48);
         Transmitir(Hum1%10 + 48);
         Transmitir('\n');
-        
-        MensajeRS232("DHT 11-4\n");
+        __delay_ms(50);
+        MensajeRS232("DHT 11-4 = ");
         LeerHT11_2();
         Transmitir('T');
         Transmitir(Temp2/10 + 48);
@@ -136,7 +136,7 @@ void __attribute__((interrupt,auto_psv)) _T1Interrupt(void){
 void __attribute__((interrupt,auto_psv)) _U2RXInterrupt(void){
     Interrupcion_RS232();
 }
-/* -------------------------Funciones DHT11------------------------------ */
+/* -------------------------Funciones DHT11-1------------------------------ */
 void LeerHT11(void){
   unsigned char i,contr=0;
   unsigned char repetir=0;
@@ -213,7 +213,7 @@ unsigned char Check(void){
 }
 /**-------------------------------------------------------------------------**/
 
-/* -------------------------Funciones DHT11------------------------------ */
+/* -------------------------Funciones DHT11-2 ------------------------------ */
 void LeerHT11_2(void){
   unsigned char i,contr=0;
   unsigned char repetir=0;
